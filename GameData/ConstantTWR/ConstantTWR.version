@@ -1,0 +1,15 @@
+{
+  "NAME": "ConstantTWR",
+  "URL": "http://ksp-avc.cybutek.net/version.php?id=497",
+  "VERSION": {
+    "MAJOR": 0,
+    "MINOR": 0,
+    "PATCH": 1,
+    "BUILD": 0
+  },
+  "KSP_VERSION": {
+    "MAJOR": 1,
+    "MINOR": 3,
+    "PATCH": 0
+  }
+}
