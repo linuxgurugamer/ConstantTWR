@@ -5,7 +5,7 @@ rem Set variables here
 
 set H=R:\KSP_1.3.0_dev
 set GAMEDIR=ConstantTWR
-set LICENSE=License.txt
+set LICENSE=LICENSE
 set README=README.md
 
 set RELEASEDIR=d:\Users\jbb\release
