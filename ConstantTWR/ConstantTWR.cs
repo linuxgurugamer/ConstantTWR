@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using ClickThroughFix;
 
 namespace ConstantTWR
 {
@@ -213,26 +214,26 @@ namespace ConstantTWR
                 allStagesWindow.x = Math.Max(0, Math.Min(allStagesWindow.x, Screen.width - 40 - allStagesWindow.width));
                 allStagesWindow.y = Math.Max(0, Math.Min(allStagesWindow.y, Screen.height - allStagesWindow.height));
 
-                allStagesWindow = GUILayout.Window(GetInstanceID() + 1, allStagesWindow, AllStagesInfoWindow, TITLE, HighLogic.Skin.window);
+                allStagesWindow = ClickThruBlocker.GUILayoutWindow(GetInstanceID() + 1, allStagesWindow, AllStagesInfoWindow, TITLE, HighLogic.Skin.window);
 
                 if (displaySingleStageTWR)
                 {
                     twr_Bounds.width = 300;
                     twr_Bounds.x = Math.Max(0, Math.Min(twr_Bounds.x, Screen.width - 40 - twr_Bounds.width));
                     twr_Bounds.y = Math.Max(0, Math.Min(twr_Bounds.y, Screen.height - twr_Bounds.height));
-                    twr_Bounds = GUILayout.Window(GetInstanceID() + 2, twr_Bounds, TwrWindow, TITLE, HighLogic.Skin.window);
+                    twr_Bounds = ClickThruBlocker.GUILayoutWindow(GetInstanceID() + 2, twr_Bounds, TwrWindow, TITLE, HighLogic.Skin.window);
                 }                if (displayFileSelection)
                 {
                     filesel_Bounds.x = Math.Max(0, Math.Min(filesel_Bounds.x, (Screen.width - filesel_Bounds.width) / 2));
                     filesel_Bounds.y = Math.Max(0, Math.Min(filesel_Bounds.y, Screen.height - filesel_Bounds.height));
-                    filesel_Bounds = GUILayout.Window(GetInstanceID() + 3, filesel_Bounds, FileSelWindow, TITLE, HighLogic.Skin.window);
+                    filesel_Bounds = ClickThruBlocker.GUILayoutWindow(GetInstanceID() + 3, filesel_Bounds, FileSelWindow, TITLE, HighLogic.Skin.window);
                 }
                 if (displayGetName)
                 {
                     getname_Bounds.width = 300;
                     getname_Bounds.x = Math.Max(0, Math.Min(getname_Bounds.x, (Screen.width - getname_Bounds.width) / 2));
                     getname_Bounds.y = Math.Max(0, Math.Min(getname_Bounds.y, Screen.height - getname_Bounds.height));
-                    getname_Bounds = GUILayout.Window(GetInstanceID() + 4, getname_Bounds, GetNameWindow, TITLE, HighLogic.Skin.window);
+                    getname_Bounds = ClickThruBlocker.GUILayoutWindow(GetInstanceID() + 4, getname_Bounds, GetNameWindow, TITLE, HighLogic.Skin.window);
                 }
             }
         }
