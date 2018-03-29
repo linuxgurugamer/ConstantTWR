@@ -44,6 +44,8 @@ namespace ConstantTWR
         }
         public void SaveData(string path)
         {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
             string fullPath = path + "/" + name + ".twr";
             if (File.Exists(fullPath))
                 File.Delete(fullPath);

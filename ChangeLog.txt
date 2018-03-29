@@ -10,3 +10,7 @@
 0.0.3
 	Added support for ClickThroughBlocker
 	Updated for 1.4.1
+
+0.0.4
+	Added code to create config directory if it wasn't there
+	Changed version info to allow all 1.4.*

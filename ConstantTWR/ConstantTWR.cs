@@ -70,40 +70,34 @@ namespace ConstantTWR
             showUI = false;
         }
 
-       
+
         public static stageTWRs stageTWRsClass = new stageTWRs();
 
         public void UpdateToolbarStock()
         {
             if (!GameDatabase.Instance.IsReady())
                 return;
-#if false
-            if (ToolbarManager.ToolbarAvailable)
-            {
-                InitToolbarButton();
-            }
-            else
-#endif
-            {
-                if (!CTWR_Texture_Load)
-                {
 
-                    if (GameDatabase.Instance.ExistsTexture(TEXTURE_DIR + "off-38"))
-                        CTWR_button_off_img = GameDatabase.Instance.GetTexture(TEXTURE_DIR + "off-38", false);
-                    if (GameDatabase.Instance.ExistsTexture(TEXTURE_DIR + "on-38"))
-                        CTWR_button_on_img = GameDatabase.Instance.GetTexture(TEXTURE_DIR + "on-38", false);
 
-                    CTWR_Texture_Load = true;
-                }
-                if (CTWR_Button == null)
-                {
-                    CTWR_Button = ApplicationLauncher.Instance.AddModApplication(GUIToggleToolbar, GUIToggleToolbar,
-                            null, null,
-                            null, null,
-                            ApplicationLauncher.AppScenes.FLIGHT | ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH,
-                            CTWR_button_off_img);
-                }
+            if (!CTWR_Texture_Load)
+            {
+
+                if (GameDatabase.Instance.ExistsTexture(TEXTURE_DIR + "off-38"))
+                    CTWR_button_off_img = GameDatabase.Instance.GetTexture(TEXTURE_DIR + "off-38", false);
+                if (GameDatabase.Instance.ExistsTexture(TEXTURE_DIR + "on-38"))
+                    CTWR_button_on_img = GameDatabase.Instance.GetTexture(TEXTURE_DIR + "on-38", false);
+
+                CTWR_Texture_Load = true;
             }
+            if (CTWR_Button == null)
+            {
+                CTWR_Button = ApplicationLauncher.Instance.AddModApplication(GUIToggleToolbar, GUIToggleToolbar,
+                        null, null,
+                        null, null,
+                        ApplicationLauncher.AppScenes.FLIGHT | ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH,
+                        CTWR_button_off_img);
+            }
+
         }
 
         public void GUIToggleToolbar()
@@ -320,8 +314,13 @@ namespace ConstantTWR
         int selectedFileIdx = -1;
         void GetFileList()
         {
-            DirectoryInfo d = new DirectoryInfo(AS_CFG_FILE);
-            FilesList = d.GetFiles("*.twr");
+            if (Directory.Exists(AS_CFG_DIR))
+            {
+                DirectoryInfo d = new DirectoryInfo(AS_CFG_DIR);
+                FilesList = d.GetFiles("*.twr");
+            }
+            else
+                Directory.CreateDirectory(AS_CFG_DIR);
         }
 
         private void FileSelWindow(int id)
@@ -480,22 +479,22 @@ namespace ConstantTWR
 
 
         private static String AS_BASE_FOLDER = CONFIG_BASE_FOLDER + "ConstantTWR/";
-        private static String AS_CFG_FILE = AS_BASE_FOLDER + "PluginData";
+        private static String AS_CFG_DIR = AS_BASE_FOLDER + "PluginData";
 
         void loadTWRs(string name)
         {
-            Log.Info("Loading file: " + AS_CFG_FILE + "/" + name);
-            stageTWRsClass.LoadData(AS_CFG_FILE, name);
+            Log.Info("Loading file: " + AS_CFG_DIR + "/" + name);
+            stageTWRsClass.LoadData(AS_CFG_DIR, name);
         }
 
         void saveTWRs()
         {
-            stageTWRsClass.SaveData(AS_CFG_FILE);
+            stageTWRsClass.SaveData(AS_CFG_DIR);
         }
 
         void deleteTWRs()
         {
-            stageTWRsClass.DeleteData(AS_CFG_FILE);
+            stageTWRsClass.DeleteData(AS_CFG_DIR);
         }
         #region AllStagesInfoWindow
 
@@ -550,7 +549,7 @@ namespace ConstantTWR
 
                     GUILayout.FlexibleSpace();
                     bool b = GUI.enabled;
-                    if ( displaySingleStageTWR || displayGetName || displayFileSelection)
+                    if (displaySingleStageTWR || displayGetName || displayFileSelection)
                         GUI.enabled = false;
                     else
                         GUI.enabled = twrsetting.activated;
@@ -567,7 +566,7 @@ namespace ConstantTWR
                         btn.normal.background = t;
 #endif
                     }
-                    if ( GUILayout.Button(s, btn, GUILayout.Width(150), GUILayout.Height(50)))
+                    if (GUILayout.Button(s, btn, GUILayout.Width(150), GUILayout.Height(50)))
                     {
                         if (!activeFlight || FlightGlobals.ActiveVessel.LandedOrSplashed)
                         {
@@ -614,8 +613,8 @@ namespace ConstantTWR
 
             GUILayout.FlexibleSpace();
             GUILayout.Space(10);
-            
-            if (HighLogic.LoadedScene == GameScenes.EDITOR ||  FlightGlobals.ActiveVessel.LandedOrSplashed)
+
+            if (HighLogic.LoadedScene == GameScenes.EDITOR || FlightGlobals.ActiveVessel.LandedOrSplashed)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Add:");
@@ -702,7 +701,7 @@ namespace ConstantTWR
                 }
                 GUILayout.EndHorizontal();
             }
-            
+
             GUI.DragWindow();
         }
         #endregion
