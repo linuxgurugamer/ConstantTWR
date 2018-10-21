@@ -17,3 +17,6 @@
 
 0.0.4.1
 	Added dependency check
+
+0.0.4.2
+	Version bump for 1.5 rebuild
