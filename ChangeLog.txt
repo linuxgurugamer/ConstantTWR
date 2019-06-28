@@ -20,3 +20,7 @@
 
 0.0.4.2
 	Version bump for 1.5 rebuild
+
+0.0.4.4
+	Version bump for KSP 1.7.2
+	Updated AssemblyVersion.tt for location independent builds
