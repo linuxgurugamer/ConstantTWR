@@ -40,3 +40,7 @@ ChangeLog
 
 0.0.5.3
 	Really did the MiniAVC update
+
+0.0.5.4
+	Added AssemblyFileVersion
+	Updated version file for 1.12
